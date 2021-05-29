@@ -1,6 +1,5 @@
 public class C_rules extends CBaseVisitor<String>
 {
-
     @Override public String visitStructDecl(CParser.StructDeclContext ctx)
     {
         String id = ctx.Identifier().getText();
@@ -10,13 +9,24 @@ public class C_rules extends CBaseVisitor<String>
             {
                 if(id.charAt(id.length() - 1) == 's')
                 {
-                    System.out.print("The Name of the struct is : ");
-                    System.out.println(id);
+                    if(id.charAt(id.length() - 2) == '_')
+                    {
+                        System.out.print("The Name of the struct is : ");
+                        System.out.println(id);
+                    }
+                    else
+                    {
+                        System.out.println("You Must Write the name of the Struct like Std_Name_s");
+                    }
                 }
                 else
                 {
                     System.out.println("You Must Write the name of the Struct like Std_Name_s");
                 }
+            }
+            else
+            {
+                System.out.println("You Must Write the name of the Struct like Std_Name_s");
             }
         }
         else
