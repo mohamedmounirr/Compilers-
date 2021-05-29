@@ -9,7 +9,7 @@ public class C_rules extends CBaseVisitor<String>
             {
                 if(id.charAt(id.length() - 1) == 's')
                 {
-                    if(id.charAt(id.length() - 2) == '_')
+                    if(id.charAt(id.length() - 2) == '_' && id.charAt(3) == '_')
                     {
                         System.out.print("The Name of the struct is : ");
                         System.out.println(id);

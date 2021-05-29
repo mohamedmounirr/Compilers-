@@ -1,4 +1,5 @@
-struct std_mohamed
+struct Std_mohamed_s
 {
+int x ;
 
 }

@@ -8,7 +8,6 @@ public class test {
         String inputFile = "t.expr";
         FileInputStream is = new FileInputStream(inputFile) ;
         ANTLRInputStream input = new ANTLRInputStream(is);
-
         CLexer lexer = new CLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CParser parser = new CParser(tokens);
