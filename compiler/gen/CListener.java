@@ -317,39 +317,111 @@ public interface CListener extends ParseTreeListener {
 	 */
 	void exitStorageClassSpecifier(CParser.StorageClassSpecifierContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CParser#typeSpecifier}.
+	 * Enter a parse tree produced by the {@code typeSpecifierEnum}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterTypeSpecifier(CParser.TypeSpecifierContext ctx);
+	void enterTypeSpecifierEnum(CParser.TypeSpecifierEnumContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CParser#typeSpecifier}.
+	 * Exit a parse tree produced by the {@code typeSpecifierEnum}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitTypeSpecifier(CParser.TypeSpecifierContext ctx);
+	void exitTypeSpecifierEnum(CParser.TypeSpecifierEnumContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code structDecl}
-	 * labeled alternative in {@link CParser#structOrUnionSpecifier}.
+	 * Enter a parse tree produced by the {@code typeSpecifierStructOrUnion}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterStructDecl(CParser.StructDeclContext ctx);
+	void enterTypeSpecifierStructOrUnion(CParser.TypeSpecifierStructOrUnionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code structDecl}
-	 * labeled alternative in {@link CParser#structOrUnionSpecifier}.
+	 * Exit a parse tree produced by the {@code typeSpecifierStructOrUnion}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitStructDecl(CParser.StructDeclContext ctx);
+	void exitTypeSpecifierStructOrUnion(CParser.TypeSpecifierStructOrUnionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code structId}
-	 * labeled alternative in {@link CParser#structOrUnionSpecifier}.
+	 * Enter a parse tree produced by the {@code typeSpecifierTypedefName}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterStructId(CParser.StructIdContext ctx);
+	void enterTypeSpecifierTypedefName(CParser.TypeSpecifierTypedefNameContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code structId}
-	 * labeled alternative in {@link CParser#structOrUnionSpecifier}.
+	 * Exit a parse tree produced by the {@code typeSpecifierTypedefName}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitStructId(CParser.StructIdContext ctx);
+	void exitTypeSpecifierTypedefName(CParser.TypeSpecifierTypedefNameContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code typeSpecifierPrimitives}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeSpecifierPrimitives(CParser.TypeSpecifierPrimitivesContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeSpecifierPrimitives}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeSpecifierPrimitives(CParser.TypeSpecifierPrimitivesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code typeSpecifierAtomicType}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeSpecifierAtomicType(CParser.TypeSpecifierAtomicTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeSpecifierAtomicType}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeSpecifierAtomicType(CParser.TypeSpecifierAtomicTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code typeSpecifierPointer}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeSpecifierPointer(CParser.TypeSpecifierPointerContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeSpecifierPointer}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeSpecifierPointer(CParser.TypeSpecifierPointerContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code typeSpecifierTypeOf}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeSpecifierTypeOf(CParser.TypeSpecifierTypeOfContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeSpecifierTypeOf}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeSpecifierTypeOf(CParser.TypeSpecifierTypeOfContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code typeSpecifierExtension}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeSpecifierExtension(CParser.TypeSpecifierExtensionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeSpecifierExtension}
+	 * labeled alternative in {@link CParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeSpecifierExtension(CParser.TypeSpecifierExtensionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CParser#structOrUnionSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterStructOrUnionSpecifier(CParser.StructOrUnionSpecifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CParser#structOrUnionSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitStructOrUnionSpecifier(CParser.StructOrUnionSpecifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CParser#structOrUnion}.
 	 * @param ctx the parse tree
@@ -761,15 +833,29 @@ public interface CListener extends ParseTreeListener {
 	 */
 	void exitBlockItemList(CParser.BlockItemListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CParser#blockItem}.
+	 * Enter a parse tree produced by the {@code localStatement}
+	 * labeled alternative in {@link CParser#blockItem}.
 	 * @param ctx the parse tree
 	 */
-	void enterBlockItem(CParser.BlockItemContext ctx);
+	void enterLocalStatement(CParser.LocalStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CParser#blockItem}.
+	 * Exit a parse tree produced by the {@code localStatement}
+	 * labeled alternative in {@link CParser#blockItem}.
 	 * @param ctx the parse tree
 	 */
-	void exitBlockItem(CParser.BlockItemContext ctx);
+	void exitLocalStatement(CParser.LocalStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code localDeclaration}
+	 * labeled alternative in {@link CParser#blockItem}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocalDeclaration(CParser.LocalDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code localDeclaration}
+	 * labeled alternative in {@link CParser#blockItem}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocalDeclaration(CParser.LocalDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CParser#expressionStatement}.
 	 * @param ctx the parse tree
@@ -861,15 +947,41 @@ public interface CListener extends ParseTreeListener {
 	 */
 	void exitTranslationUnit(CParser.TranslationUnitContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CParser#externalDeclaration}.
+	 * Enter a parse tree produced by the {@code externalFunctionDefinition}
+	 * labeled alternative in {@link CParser#externalDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterExternalDeclaration(CParser.ExternalDeclarationContext ctx);
+	void enterExternalFunctionDefinition(CParser.ExternalFunctionDefinitionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CParser#externalDeclaration}.
+	 * Exit a parse tree produced by the {@code externalFunctionDefinition}
+	 * labeled alternative in {@link CParser#externalDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitExternalDeclaration(CParser.ExternalDeclarationContext ctx);
+	void exitExternalFunctionDefinition(CParser.ExternalFunctionDefinitionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code globalDeclaration}
+	 * labeled alternative in {@link CParser#externalDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterGlobalDeclaration(CParser.GlobalDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code globalDeclaration}
+	 * labeled alternative in {@link CParser#externalDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitGlobalDeclaration(CParser.GlobalDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code externalSemicolon}
+	 * labeled alternative in {@link CParser#externalDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterExternalSemicolon(CParser.ExternalSemicolonContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code externalSemicolon}
+	 * labeled alternative in {@link CParser#externalDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitExternalSemicolon(CParser.ExternalSemicolonContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CParser#functionDefinition}.
 	 * @param ctx the parse tree

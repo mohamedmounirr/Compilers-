@@ -387,37 +387,109 @@ public class CBaseListener implements CListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTypeSpecifier(CParser.TypeSpecifierContext ctx) { }
+	@Override public void enterTypeSpecifierEnum(CParser.TypeSpecifierEnumContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTypeSpecifier(CParser.TypeSpecifierContext ctx) { }
+	@Override public void exitTypeSpecifierEnum(CParser.TypeSpecifierEnumContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStructDecl(CParser.StructDeclContext ctx) { }
+	@Override public void enterTypeSpecifierStructOrUnion(CParser.TypeSpecifierStructOrUnionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStructDecl(CParser.StructDeclContext ctx) { }
+	@Override public void exitTypeSpecifierStructOrUnion(CParser.TypeSpecifierStructOrUnionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStructId(CParser.StructIdContext ctx) { }
+	@Override public void enterTypeSpecifierTypedefName(CParser.TypeSpecifierTypedefNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStructId(CParser.StructIdContext ctx) { }
+	@Override public void exitTypeSpecifierTypedefName(CParser.TypeSpecifierTypedefNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeSpecifierPrimitives(CParser.TypeSpecifierPrimitivesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeSpecifierPrimitives(CParser.TypeSpecifierPrimitivesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeSpecifierAtomicType(CParser.TypeSpecifierAtomicTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeSpecifierAtomicType(CParser.TypeSpecifierAtomicTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeSpecifierPointer(CParser.TypeSpecifierPointerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeSpecifierPointer(CParser.TypeSpecifierPointerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeSpecifierTypeOf(CParser.TypeSpecifierTypeOfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeSpecifierTypeOf(CParser.TypeSpecifierTypeOfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeSpecifierExtension(CParser.TypeSpecifierExtensionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeSpecifierExtension(CParser.TypeSpecifierExtensionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStructOrUnionSpecifier(CParser.StructOrUnionSpecifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStructOrUnionSpecifier(CParser.StructOrUnionSpecifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -915,13 +987,25 @@ public class CBaseListener implements CListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlockItem(CParser.BlockItemContext ctx) { }
+	@Override public void enterLocalStatement(CParser.LocalStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBlockItem(CParser.BlockItemContext ctx) { }
+	@Override public void exitLocalStatement(CParser.LocalStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLocalDeclaration(CParser.LocalDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLocalDeclaration(CParser.LocalDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1035,13 +1119,37 @@ public class CBaseListener implements CListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExternalDeclaration(CParser.ExternalDeclarationContext ctx) { }
+	@Override public void enterExternalFunctionDefinition(CParser.ExternalFunctionDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExternalDeclaration(CParser.ExternalDeclarationContext ctx) { }
+	@Override public void exitExternalFunctionDefinition(CParser.ExternalFunctionDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGlobalDeclaration(CParser.GlobalDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGlobalDeclaration(CParser.GlobalDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExternalSemicolon(CParser.ExternalSemicolonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExternalSemicolon(CParser.ExternalSemicolonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

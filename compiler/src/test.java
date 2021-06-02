@@ -11,9 +11,14 @@ public class test {
         CLexer lexer = new CLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CParser parser = new CParser(tokens);
-        ParseTree tree = parser.structOrUnionSpecifier();
+        //ParseTree tree = parser.structOrUnionSpecifier();
+        ParseTree tree1 = parser.compilationUnit();
+
         C_rules cv = new C_rules();
-        cv.visit(tree);
+
+        //cv.visit(tree);
+        cv.visit(tree1);
+
 
 
         //ParseTreeWalker parseTreeWalker = new ParseTreeWalker();

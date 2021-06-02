@@ -201,19 +201,19 @@ typeSpecifier
     |   '_Complex'
     |   '__m128'
     |   '__m128d'
-    |   '__m128i')
-    |   '__extension__' '(' ('__m128' | '__m128d' | '__m128i') ')'
-    |   atomicTypeSpecifier
-    |   structOrUnionSpecifier
-    |   enumSpecifier
-    |   typedefName
-    |   '__typeof__' '(' constantExpression ')' // GCC extension
-    |   typeSpecifier pointer
+    |   '__m128i')                                                  #typeSpecifierPrimitives
+    |   '__extension__' '(' ('__m128' | '__m128d' | '__m128i') ')'  #typeSpecifierExtension
+    |   atomicTypeSpecifier                                         #typeSpecifierAtomicType
+    |   structOrUnionSpecifier                                      #typeSpecifierStructOrUnion
+    |   enumSpecifier                                               #typeSpecifierEnum
+    |   typedefName                                                 #typeSpecifierTypedefName
+    |   '__typeof__' '(' constantExpression ')'                     #typeSpecifierTypeOf // GCC extension
+    |   typeSpecifier pointer                                       #typeSpecifierPointer
     ;
 
 structOrUnionSpecifier
-    :   structOrUnion Identifier? '{' structDeclarationList '}' #structDecl
-    |   structOrUnion Identifier                                #structId
+    :   structOrUnion Identifier? '{' structDeclarationList '}'
+    |   structOrUnion Identifier
     ;
 
 structOrUnion
@@ -428,8 +428,8 @@ blockItemList
     ;
 
 blockItem
-    :   statement
-    |   declaration
+    :   statement       #localStatement
+    |   declaration     #localDeclaration
     ;
 
 expressionStatement
@@ -480,9 +480,9 @@ translationUnit
     ;
 
 externalDeclaration
-    :   functionDefinition
-    |   declaration
-    |   ';' // stray ;
+    :   functionDefinition      #externalFunctionDefinition
+    |   declaration             #globalDeclaration
+    |   ';'                     #externalSemicolon              // stray ;
     ;
 
 functionDefinition

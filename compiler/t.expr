@@ -1,4 +1,16 @@
+int x ;
+
 struct Std_mohamed_s
 {
+int x;
+};
+struct Std_moham
+{
+int x;
+};
 
-}
+enum Std_teste
+{
+ a,
+ y
+};
