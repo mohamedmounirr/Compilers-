@@ -25,12 +25,15 @@ public class C_rules extends CBaseVisitor<String[]>
         {
             String[] typeAndID = visit(declarationSpecifiers.declarationSpecifier(0).typeSpecifier());
             String id = typeAndID[1];
+
             if(id.length() > 3)
             {
                 if(id.charAt(0) == 'S' && id.charAt(1) <= 't' && id.charAt(2) == 'd')
                 {
                     if(id.charAt(id.length() - 1) == 's')
                     {
+                        System.out.print("line: " + ctx.start.getLine());
+                        System.out.println( " Variable : " +typeAndID[2] + " it's type is "+ typeAndID[3] + " is Local");
                         if(id.charAt(id.length() - 2) == '_' && id.charAt(3) == '_')
                         {
                             System.out.print("The Name of the struct is : ");
@@ -49,7 +52,7 @@ public class C_rules extends CBaseVisitor<String[]>
                         if(id.charAt(id.length() - 2) == '_' && id.charAt(3) == '_')
                         {
                             System.out.print("The Name of the union is : ");
-                            System.out.println(id);
+                            System.out.print(id);
                             System.out.println("  and it is global");
                         }
                         else
@@ -107,7 +110,7 @@ public class C_rules extends CBaseVisitor<String[]>
             String type = declarationSpecifiers.declarationSpecifier(0).getText();
             String id = declarationSpecifiers.declarationSpecifier(1).getText();
             System.out.print("line: " + ctx.start.getLine());
-            System.out.println( " Variable " +id + " it's type is "+ type + " is Local");
+            System.out.println( " Variable : " +id + " it's type is "+ type + " and it is Local");
 
         }
         //Struct or union or enum
@@ -199,9 +202,21 @@ public class C_rules extends CBaseVisitor<String[]>
 
         String type = ctx.enumSpecifier().Enum().getText();
         String id = ctx.enumSpecifier().Identifier().getText();
-        String[] typeAndName = {type,id};
+
+
+        String[] typeAndName = {type,id };
 
         return typeAndName ;
     }
+    /*@Override public String[] visitFunctionDefinition(CParser.FunctionDefinitionContext ctx)
+    {
+        String type = ctx.declarationSpecifiers().declarationSpecifier(2).typeSpecifier().getText();
+        String id   = ctx.declarator().directDeclarator().Identifier().getText();
+        System.out.print("line: " + ctx.start.getLine());
+        System.out.println( " Function name is : " +id + " it's type is "+ type );
+
+        String[] typeAndId = {type,id };
+        return typeAndId ;
+    }*/
 
 }
