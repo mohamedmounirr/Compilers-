@@ -1,5 +1,8 @@
 int x ;
-
+void fun()
+{
+int g ;
+}
 struct Std_mohamed_s
 {
 int x;
@@ -14,3 +17,11 @@ enum Std_test_e
  a,
  y
 };
+int main()
+{
+int testVar ;
+struct Std_mohamed_s
+{
+int j ;
+};
+}

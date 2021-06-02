@@ -36,6 +36,7 @@ public class C_rules extends CBaseVisitor<String[]>
                             System.out.print("The Name of the struct is : ");
                             System.out.print(id);
                             System.out.println("  and it is global");
+
                         }
                         else
                         {
@@ -49,7 +50,7 @@ public class C_rules extends CBaseVisitor<String[]>
                         {
                             System.out.print("The Name of the union is : ");
                             System.out.println(id);
-                            System.out.print("  and it is global");
+                            System.out.println("  and it is global");
                         }
                         else
                         {
@@ -63,7 +64,7 @@ public class C_rules extends CBaseVisitor<String[]>
                         {
                             System.out.print("The Name of the enum is : ");
                             System.out.print(id);
-                            System.out.print(" and it is global");
+                            System.out.println(" and it is global");
                         }
                         else
                         {
@@ -105,8 +106,8 @@ public class C_rules extends CBaseVisitor<String[]>
         {
             String type = declarationSpecifiers.declarationSpecifier(0).getText();
             String id = declarationSpecifiers.declarationSpecifier(1).getText();
-            System.out.print(" line: " + ctx.start.getLine());
-            System.out.println( " Variable" +id + " it's type is :"+ type + " is Local");
+            System.out.print("line: " + ctx.start.getLine());
+            System.out.println( " Variable " +id + " it's type is "+ type + " is Local");
 
         }
         //Struct or union or enum
@@ -114,6 +115,7 @@ public class C_rules extends CBaseVisitor<String[]>
         {
             String[] typeAndID = visit(declarationSpecifiers.declarationSpecifier(0).typeSpecifier());
             String id = typeAndID[1];
+            System.out.println( "Variable " +typeAndID[2] + " it's type is "+ typeAndID[3] + " is Local");
             if(id.length() > 3)
             {
                 if(id.charAt(0) == 'S' && id.charAt(1) <= 't' && id.charAt(2) == 'd')
@@ -138,7 +140,7 @@ public class C_rules extends CBaseVisitor<String[]>
                         {
                             System.out.print("The Name of the union is : ");
                             System.out.println(id);
-                            System.out.print("  and it is Local");
+                            System.out.println("  and it is Local");
                         }
                         else
                         {
@@ -152,7 +154,7 @@ public class C_rules extends CBaseVisitor<String[]>
                         {
                             System.out.print("The Name of the enum is : ");
                             System.out.println(id);
-                            System.out.print("  and it is Local");
+                            System.out.println("  and it is Local");
                         }
                         else
                         {
@@ -187,7 +189,9 @@ public class C_rules extends CBaseVisitor<String[]>
         String type = ctx.structOrUnionSpecifier().structOrUnion().getText();
         String id = ctx.structOrUnionSpecifier().Identifier().getText();
 
-        String[] typeAndName = {type,id};
+        String Var_type = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(0).specifierQualifierList().typeSpecifier().getText();
+        String Var_name = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(0).specifierQualifierList().specifierQualifierList().typeSpecifier().getText();
+        String[] typeAndName = {type,id , Var_name , Var_type};
 
         return typeAndName;
     }
