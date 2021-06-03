@@ -13,8 +13,8 @@ public class test {
         CParser parser = new CParser(tokens);
         //ParseTree tree = parser.structOrUnionSpecifier();
         ParseTree tree1 = parser.compilationUnit();
-
-        C_rules cv = new C_rules();
+        //String m = {"t",".","expr"};
+        C_rules cv = new C_rules(inputFile);
 
         //cv.visit(tree);
         cv.visit(tree1);

@@ -1,5 +1,13 @@
+import java.io.File;
+
 public class C_rules extends CBaseVisitor<String[]>
 {
+    String Filename ;
+    public C_rules(String m) {
+
+        Filename = m ;
+    }
+
     /**
      * {@inheritDoc}
      *
@@ -43,7 +51,7 @@ public class C_rules extends CBaseVisitor<String[]>
                         }
                         else
                         {
-                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename );
                             System.out.println("You Must Write the name of the Struct like Std_Name_s");
                         }
                     }
@@ -57,7 +65,7 @@ public class C_rules extends CBaseVisitor<String[]>
                         }
                         else
                         {
-                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                             System.out.println("You Must Write the name of the Union like Std_Name_u");
                         }
                     }
@@ -71,25 +79,25 @@ public class C_rules extends CBaseVisitor<String[]>
                         }
                         else
                         {
-                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                             System.out.println("You Must Write the name of the enum like Std_Name_e");
                         }
                     }
                     else
                     {
-                        System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                        System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                         System.out.println("You Must Write the name of the Struct or union or enum like Std_Name_s or Std_Name_u or Std_Name_e");
                     }
                 }
                 else
                 {
-                    System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                    System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                     System.out.println("You Must Write the name of the Struct or union or enum like Std_Name_s or Std_Name_u or Std_Name_e");
                 }
             }
             else
             {
-                System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                 System.out.println("You Must Write the name of the Struct or union or enum like Std_Name_s or Std_Name_u or Std_Name_e");
             }
 
@@ -109,7 +117,7 @@ public class C_rules extends CBaseVisitor<String[]>
         {
             String type = declarationSpecifiers.declarationSpecifier(0).getText();
             String id = declarationSpecifiers.declarationSpecifier(1).getText();
-            System.out.print("line: " + ctx.start.getLine());
+            System.out.print("line: " + ctx.start.getLine()) ;
             System.out.println( " Variable : " +id + " it's type is "+ type + " and it is Local");
 
         }
@@ -133,7 +141,7 @@ public class C_rules extends CBaseVisitor<String[]>
                         }
                         else
                         {
-                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                             System.out.println("You Must Write the name of the Struct like Std_Name_s");
                         }
                     }
@@ -147,7 +155,7 @@ public class C_rules extends CBaseVisitor<String[]>
                         }
                         else
                         {
-                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                             System.out.println("You Must Write the name of the Union like Std_Name_u");
                         }
                     }
@@ -161,25 +169,25 @@ public class C_rules extends CBaseVisitor<String[]>
                         }
                         else
                         {
-                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                            System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                             System.out.println("You Must Write the name of the enum like Std_Name_e");
                         }
                     }
                     else
                     {
-                        System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                        System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                         System.out.println("You Must Write the name of the Struct or union or enum like Std_Name_s or Std_Name_u or Std_Name_e");
                     }
                 }
                 else
                 {
-                    System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                    System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                     System.out.println("You Must Write the name of the Struct or union or enum like Std_Name_s or Std_Name_u or Std_Name_e");
                 }
             }
             else
             {
-                System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine());
+                System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                 System.out.println("You Must Write the name of the Struct or union or enum like Std_Name_s or Std_Name_u or Std_Name_e");
             }
 
@@ -208,15 +216,18 @@ public class C_rules extends CBaseVisitor<String[]>
 
         return typeAndName ;
     }
-    /*@Override public String[] visitFunctionDefinition(CParser.FunctionDefinitionContext ctx)
+    /*
+    @Override public String[] visitFunctionDefinition(CParser.FunctionDefinitionContext ctx)
     {
-        String type = ctx.declarationSpecifiers().declarationSpecifier(2).typeSpecifier().getText();
+        String type = ctx.declarationSpecifiers().declarationSpecifier(2).typeSpecifier().getText().;
         String id   = ctx.declarator().directDeclarator().Identifier().getText();
-        System.out.print("line: " + ctx.start.getLine());
+        System.out.print("line: " + ctx.start.getLine() +ctx.declarationSpecifiers().declarationSpecifier(2).typeSpecifier().getText());
         System.out.println( " Function name is : " +id + " it's type is "+ type );
 
         String[] typeAndId = {type,id };
         return typeAndId ;
-    }*/
+    }
+    */
+
 
 }

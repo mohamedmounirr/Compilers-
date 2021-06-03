@@ -3,15 +3,15 @@ void fun()
 {
 int g ;
 }
-union Std_mohamed_u
+union Std_mohamed_
 {
 int x;
 };
-struct Std_moham_s
+struct Std_mohams
 {
 int x;
 };
-enum Std_test_e
+enum Std_test_
 {
  a,
  y
