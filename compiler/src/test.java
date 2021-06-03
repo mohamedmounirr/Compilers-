@@ -5,7 +5,7 @@ import org.antlr.v4.runtime.tree.*;
 public class test {
     public static void main(String[] args) throws Exception
     {
-        String inputFile = "t.expr";
+        String inputFile = "main.expr";
         FileInputStream is = new FileInputStream(inputFile) ;
         ANTLRInputStream input = new ANTLRInputStream(is);
         CLexer lexer = new CLexer(input);
