@@ -1,5 +1,11 @@
 import java.io.File;
 
+/**
+ *  @brief <b>CBaseVisitor</b>
+ *  Extended class from CBaseVisitor class
+ *  @return Stringe[] which is the name of the struct or union or enum
+ *  @details
+ */
 public class C_rules extends CBaseVisitor<String[] >
 {
     String Filename ;
@@ -13,12 +19,12 @@ public class C_rules extends CBaseVisitor<String[] >
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     *  @brief <b>visitGlobalDeclaration</b>
+     *  The global decleration get inside
+     *  @param ctx GlobalDeclarationContext
+     *  @return Stringe[] which is the name of the struct or union or enum
+     *  @details
      */
-
     @Override public String[] visitGlobalDeclaration(CParser.GlobalDeclarationContext ctx)
     {
         CParser.DeclarationSpecifiersContext declarationSpecifiers = ctx.declaration().declarationSpecifiers();
@@ -132,8 +138,13 @@ public class C_rules extends CBaseVisitor<String[] >
         String[] s = {ctx.getText()};
         return s;
     }
-
-    //blockItem: declaration
+    /**
+     *  @brief <b>visitGlobalDeclaration</b>
+     *  The Local decleration get inside
+     *  @param ctx LocalDeclarationContext
+     *  @return Stringe[] which is the name of the struct or union or enum
+     *  @details
+     */
     @Override public String[] visitLocalDeclaration(CParser.LocalDeclarationContext ctx)
     {
         CParser.DeclarationSpecifiersContext declarationSpecifiers = ctx.declaration().declarationSpecifiers();
@@ -247,7 +258,15 @@ public class C_rules extends CBaseVisitor<String[] >
         String[] s = {ctx.getText()};
         return s;
     }
-    @Override public String[] visitTypeSpecifierStructOrUnion(CParser.TypeSpecifierStructOrUnionContext ctx) {
+    /**
+     *  @brief <b>visitGlobalDeclaration</b>
+     *  The global or local decleration of struct or union get inside
+     *  @param ctx TypeSpecifierStructOrUnionContext
+     *  @return Stringe[] which is the name of the struct or union or enum
+     *  @details
+     */
+    @Override public String[] visitTypeSpecifierStructOrUnion(CParser.TypeSpecifierStructOrUnionContext ctx)
+    {
         String type = ctx.structOrUnionSpecifier().structOrUnion().getText();
         String id = ctx.structOrUnionSpecifier().Identifier().getText();
         String typeAndName[]= {"","","","","","","","","","","",""}  ;
@@ -292,7 +311,15 @@ public class C_rules extends CBaseVisitor<String[] >
 
         return typeAndName;
     }
-    @Override public String[] visitTypeSpecifierEnum(CParser.TypeSpecifierEnumContext ctx) {
+    /**
+     *  @brief <b>visitGlobalDeclaration</b>
+     *  The global or local decleration or enum get inside
+     *  @param ctx TypeSpecifierEnumContext
+     *  @return Stringe[] which is the name of the struct or union or enum
+     *  @details
+     */
+    @Override public String[] visitTypeSpecifierEnum(CParser.TypeSpecifierEnumContext ctx)
+    {
 
         String type = ctx.enumSpecifier().Enum().getText();
         String id = ctx.enumSpecifier().Identifier().getText();
@@ -337,7 +364,13 @@ public class C_rules extends CBaseVisitor<String[] >
 
         return typeAndName ;
     }
-
+    /**
+     *  @brief <b>visitGlobalDeclaration</b>
+     *  The global decleration get inside
+     *  @param ctx GlobalDeclarationContext
+     *  @return Stringe[] which is the name of the struct or union or enum
+     *  @details
+     */
     @Override public String[] visitExternalFunctionDefinition(CParser.ExternalFunctionDefinitionContext ctx)
     {
         String type = ctx.functionDefinition().declarationSpecifiers().declarationSpecifier(0).getText();
@@ -353,7 +386,15 @@ public class C_rules extends CBaseVisitor<String[] >
         String[] s = {ctx.getText()};
         return s;
     }
-    @Override public String[] visitParameterDeclaration(CParser.ParameterDeclarationContext ctx) {
+    /**
+     *  @brief <b>visitGlobalDeclaration</b>
+     *  The global decleration get inside
+     *  @param ctx GlobalDeclarationContext
+     *  @return Stringe[] which is the name of the struct or union or enum
+     *  @details
+     */
+    @Override public String[] visitParameterDeclaration(CParser.ParameterDeclarationContext ctx)
+    {
 
         String type = ctx.declarationSpecifiers().declarationSpecifier(0).getText();
         String id = ctx.declarator().getText();

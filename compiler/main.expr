@@ -1,3 +1,4 @@
+
 int g_var ;
 struct Std_str1s
 {
@@ -17,7 +18,7 @@ union Std_Uni1u
    char  Union1_var2  ;
    float Union1_var3  ;
 };
-union Uni2_u
+union Uni2_uu
 {
    int   Union2_var1  ;
    char  Union2_var2  ;
