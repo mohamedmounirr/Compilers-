@@ -39,7 +39,7 @@ public class C_rules extends CBaseVisitor<String[] >
             String id = typeAndID[1];
             int j =0 ;
 
-            if(id.length() > 3)
+            if(id.length() >6)
             {
                 if(id.charAt(0) == 'S' && id.charAt(1) <= 't' && id.charAt(2) == 'd')
                 {
@@ -155,7 +155,7 @@ public class C_rules extends CBaseVisitor<String[] >
             String id = typeAndID[1];
             int j = 0 ;
             System.out.println( "Variable " +typeAndID[2] + " it's type is "+ typeAndID[3] + " is Local");
-            if(id.length() > 3)
+            if(id.length() > 6)
             {
                 if(id.charAt(0) == 'S' && id.charAt(1) <= 't' && id.charAt(2) == 'd')
                 {
@@ -303,7 +303,7 @@ public class C_rules extends CBaseVisitor<String[] >
         CParser.EnumeratorListContext x =  ctx.enumSpecifier().enumeratorList();
         Str_no_of_var[Str_no_of_var_index]  = x.getChildCount() - (x.getChildCount()/2);
         Str_no_of_var_index++;
-        for ( int i = 0 ; i < x.getChildCount() ; i++)
+        for ( int i = 0 ; i < (x.getChildCount() - (x.getChildCount()/2)) ; i++)
         {
             switch (i) {
                 case 0:
@@ -318,7 +318,6 @@ public class C_rules extends CBaseVisitor<String[] >
                     typeAndName[index] = ctx.enumSpecifier().enumeratorList().enumerator(2).enumerationConstant().Identifier().getText();
                     index++;
                     break;
-                    /*
                 case 3:
                     typeAndName[index] = ctx.enumSpecifier().enumeratorList().enumerator(3).enumerationConstant().Identifier().getText();
                     index++;
@@ -332,24 +331,38 @@ public class C_rules extends CBaseVisitor<String[] >
                     index++;
                     break;
 
-                     */
+
             }
         }
 
         return typeAndName ;
     }
-    /*
-    @Override public String[] visitFunctionDefinition(CParser.FunctionDefinitionContext ctx)
-    {
-        String type = ctx.declarationSpecifiers().declarationSpecifier(2).typeSpecifier().getText().;
-        String id   = ctx.declarator().directDeclarator().Identifier().getText();
-        System.out.print("line: " + ctx.start.getLine() +ctx.declarationSpecifiers().declarationSpecifier(2).typeSpecifier().getText());
-        System.out.println( " Function name is : " +id + " it's type is "+ type );
 
-        String[] typeAndId = {type,id };
-        return typeAndId ;
+    @Override public String[] visitExternalFunctionDefinition(CParser.ExternalFunctionDefinitionContext ctx)
+    {
+        String type = ctx.functionDefinition().declarationSpecifiers().declarationSpecifier(0).getText();
+        String id = ctx.functionDefinition().declarator().directDeclarator().directDeclarator().getText();
+        System.out.println("Function:\n "+ " Id:" + id + "\n  return type: "+ type );
+        visit(ctx.functionDefinition().declarator().directDeclarator().parameterTypeList().parameterList());
+        System.out.println("");
+        visit(ctx.functionDefinition().compoundStatement().blockItemList());
+
+
+
+
+        String[] s = {ctx.getText()};
+        return s;
     }
-    */
+    @Override public String[] visitParameterDeclaration(CParser.ParameterDeclarationContext ctx) {
+
+        String type = ctx.declarationSpecifiers().declarationSpecifier(0).getText();
+        String id = ctx.declarator().getText();
+
+        System.out.println("  parameters: type: " + type + ", id:" + id);
+
+        String[] s = {ctx.getText()};
+        return s;
+    }
 
 
 }

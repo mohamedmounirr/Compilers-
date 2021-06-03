@@ -1,44 +1,47 @@
 int g_var ;
-struct Std_str1_s
+struct Std_str1s
 {
    int   str1_var1  ;
    char  str1_var2  ;
    float str1_var3  ;
 };
-struct Std_str2_s
+struct Std_str2s
 {
    int   str2_var1  ;
    char  str2_var2  ;
    float str2_var3  ;
 };
-union Std_Uni1_u
+union Std_Uni1u
 {
    int   Union1_var1  ;
    char  Union1_var2  ;
    float Union1_var3  ;
 };
-union Std_Uni2_u
+union Uni2_u
 {
    int   Union2_var1  ;
    char  Union2_var2  ;
    float Union2_var3  ;
 };
-enum Std_enum1_e
+enum Std__e
 {
    enum1_var1,
    enum1_var2,
-   enum1_var3
+   enum1_var3,
 };
-
-int main()
+int main(int x , int y )
 {
-  enum Std_enum2_e
-  {
-     enum2_var1,
-     enum2_var2,
-     enum2_var3
-  };
-
-  char local_var ;
+    enum Std_enum2_e
+    {
+       enum2_var1,
+       enum2_var2,
+       enum2_var3,
+    };
+   Std_str1_s  Std_str1_obj;
+   Std_str2_s  Std_str2_obj;
+   Std_Uni1_u  Std_Uni1_obj;
+   Std_Uni2_u  Std_Uni2_obj;
+   Std_enum1_e Std_enum1_obj;
+   Std_enum2_e Std_enum2_obj;
+   char local_var ;
 }
-
