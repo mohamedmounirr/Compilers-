@@ -1,4 +1,8 @@
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import java.io.File;
+import java.io.FileReader;
 
 /**
  *  @brief <b>CBaseVisitor</b>
@@ -8,15 +12,27 @@ import java.io.File;
  */
 public class C_rules extends CBaseVisitor<String[] >
 {
-    String Filename ;
-    int [] Str_no_of_var = {0,0,0,0,0,0,0,0};
+    JSONObject declareObject = new JSONObject();
+    JSONObject globalObject = new JSONObject();
+    JSONObject localObject = new JSONObject();
+    FileReader Filename ;
+    public C_rules(JSONObject declareObject, JSONObject globalObject, JSONObject localObject , FileReader m )
+    {
+        this.declareObject = declareObject;
+        this.globalObject = globalObject;
+        this.localObject = localObject;
+        Filename = m ;
+
+    }
+
+    /*int [] Str_no_of_var = {0,0,0,0,0,0,0,0};
     int [] Enum_no_of_var = {0,0,0,0,0,0,0,0};
     int Str_no_of_var_index = 0 ;
-    int enum_no_of_var_index = 0 ;
-    public C_rules(String m) {
-
+    int enum_no_of_var_index = 0 ;*/
+    /*public C_rules(String m)
+    {
         Filename = m ;
-    }
+    }*/
 
     /**
      *  @brief <b>visitGlobalDeclaration</b>
@@ -34,18 +50,38 @@ public class C_rules extends CBaseVisitor<String[] >
         {
             String type = declarationSpecifiers.declarationSpecifier(0).getText();
             String id = declarationSpecifiers.declarationSpecifier(1).getText();
-            System.out.print("line: " + ctx.start.getLine());
-            System.out.println( " Variable : " +id + " it's type is "+ type + " and it is global");
+
+            if(type.length() > 4 && type.substring(0,4).equals("enum") && !id.matches((String) globalObject.get("union")))
+            {
+                System.out.println("Error : Line " + ctx.start.getLine() +" FileName : " + Filename +": Enum " + type.substring(4) + " \"" + id + "\" you have to write it like is " + (String) globalObject.get("enum"));
+            }
+            else if(type.length() > 5 && type.substring(0,5).equals("union") && !id.matches((String) globalObject.get("union")))
+            {
+                System.out.println("Error : Line " + ctx.start.getLine() +" FileName : " + Filename +": Union " + type.substring(5) + " \"" + id + "\" you have to write it like is " + (String) globalObject.get("union"));
+            }
+            else if(type.length() > 6 && type.substring(0,6).equals("struct") && !id.matches((String) globalObject.get("struct")))
+            {
+                System.out.println("Error : Line " + ctx.start.getLine() +" FileName : " + Filename +": Struct " + type.substring(6) + " \"" + id + "\" you have to write it like is " + (String) globalObject.get("struct"));
+            }
+            else if(!id.matches((String) globalObject.get("other")))
+            {
+                System.out.println("Error : Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" you have to write it like is  " + (String) globalObject.get("other"));
+            }
 
         }
         //Struct or union or enum
         else if(numOfBranches == 1)
         {
             String[] typeAndID = visit(declarationSpecifiers.declarationSpecifier(0).typeSpecifier());
-            String id = typeAndID[1];
-            int j =0 ;
+            //System.out.println("Data structure, type: " + typeAndID[0] + ", id: " + typeAndID[1]);
 
-            if(id.length() >6)
+            if(!typeAndID[1].matches((String) declareObject.get(typeAndID[0])))
+            {
+                System.out.println("Error : Line " + ctx.start.getLine() + ": " + typeAndID[0] + " \"" + typeAndID[1] + "\" you have to write it like is  " + (String) globalObject.get(typeAndID[0]));
+            }
+            //int j =0 ;
+
+           /* if(id.length() >6)
             {
                 if(id.charAt(0) == 'S' && id.charAt(1) <= 't' && id.charAt(2) == 'd')
                 {
@@ -126,15 +162,14 @@ public class C_rules extends CBaseVisitor<String[] >
                     System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                     System.out.println("You Must Write the name of the Struct or union or enum like Std_Name_s or Std_Name_u or Std_Name_e");
                 }
-            }
-            else
+            }*/
+           /* else
             {
                 System.out.println("error :" + ctx.getText() + " in line: " + ctx.start.getLine() + " File Name : "+ Filename);
                 System.out.println("You Must Write the name of the Struct or union or enum like Std_Name_s or Std_Name_u or Std_Name_e");
-            }
+            }*/
 
         }
-
         String[] s = {ctx.getText()};
         return s;
     }
@@ -154,19 +189,32 @@ public class C_rules extends CBaseVisitor<String[] >
         {
             String type = declarationSpecifiers.declarationSpecifier(0).getText();
             String id = declarationSpecifiers.declarationSpecifier(1).getText();
-            System.out.print("line: " + ctx.start.getLine()) ;
-            System.out.println( " Variable : " +id + " it's type is "+ type + " and it is Local");
 
-
+            if(type.length() > 4 && type.substring(0,4).equals("enum") && !id.matches((String) localObject.get("union")))
+            {
+                System.out.println("Error : Line " + ctx.start.getLine() +" FileName : " + Filename +": Enum " + type.substring(4) + " \"" + id + "\" you have to write it like is " + (String) globalObject.get("enum"));
+            }
+            else if(type.length() > 5 && type.substring(0,5).equals("union") && !id.matches((String) localObject.get("union")))
+            {
+                System.out.println("Error : Line " + ctx.start.getLine() +" FileName : " + Filename +": Union " + type.substring(5) + " \"" + id + "\" you have to write it like is " + (String) globalObject.get("union"));
+            }
+            else if(type.length() > 6 && type.substring(0,6).equals("struct") && !id.matches((String) localObject.get("struct")))
+            {
+                System.out.println("Error : Line " + ctx.start.getLine() +" FileName : " + Filename +": Struct " + type.substring(6) + " \"" + id + "\" you have to write it like is " + (String) globalObject.get("struct"));
+            }
+            else if(!id.matches((String) localObject.get("other")))
+            {
+                System.out.println("Error : Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" you have to write it like is  " + (String) globalObject.get("other"));
+            }
         }
         //Struct or union or enum
-        else if(numOfBranches == 1)
+        /*else if(numOfBranches == 1)
         {
             String[] typeAndID = visit(declarationSpecifiers.declarationSpecifier(0).typeSpecifier());
             String id = typeAndID[1];
             int j = 0 ;
             System.out.println( "Variable " +typeAndID[2] + " it's type is "+ typeAndID[3] + " is Local");
-            if(id.length() > 6)
+           if(id.length() > 6)
             {
                 if(id.charAt(0) == 'S' && id.charAt(1) <= 't' && id.charAt(2) == 'd')
                 {
@@ -253,7 +301,7 @@ public class C_rules extends CBaseVisitor<String[] >
                 System.out.println("You Must Write the name of the Struct or union or enum like Std_Name_s or Std_Name_u or Std_Name_e");
             }
 
-        }
+        }*/
 
         String[] s = {ctx.getText()};
         return s;
@@ -265,49 +313,12 @@ public class C_rules extends CBaseVisitor<String[] >
      *  @return Stringe[] which is the name of the struct or union or enum
      *  @details
      */
+
     @Override public String[] visitTypeSpecifierStructOrUnion(CParser.TypeSpecifierStructOrUnionContext ctx)
     {
         String type = ctx.structOrUnionSpecifier().structOrUnion().getText();
         String id = ctx.structOrUnionSpecifier().Identifier().getText();
-        String typeAndName[]= {"","","","","","","","","","","",""}  ;
-        typeAndName[0] = type ;
-        typeAndName[1] = id ;
-        int index = 2 ;
-        CParser.StructDeclarationListContext x =  ctx.structOrUnionSpecifier().structDeclarationList();
-        Str_no_of_var[Str_no_of_var_index]  = x.getChildCount();
-        Str_no_of_var_index++;
-        for ( int i = 0 ; i < x.getChildCount() ; i++)
-        {
-            switch (i)
-            {
-                case 0:
-                    typeAndName[index] = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(0).specifierQualifierList().typeSpecifier().getText();
-                    index++;
-                    typeAndName[index] = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(0).specifierQualifierList().specifierQualifierList().typeSpecifier().getText();
-                    index++;
-                     break;
-                case 1:
-                    typeAndName[index] = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(1).specifierQualifierList().typeSpecifier().getText();
-                    index++;
-                    typeAndName[index] = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(1).specifierQualifierList().specifierQualifierList().typeSpecifier().getText();
-                    index++;
-                    break;
-                case 2:
-                    typeAndName[index] = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(2).specifierQualifierList().typeSpecifier().getText();
-                    index++;
-                    typeAndName[index] = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(2).specifierQualifierList().specifierQualifierList().typeSpecifier().getText();
-                    index++;
-                    break;
-                case 3:
-                    typeAndName[index] = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(3).specifierQualifierList().typeSpecifier().getText();
-                    index++;
-                    typeAndName[index] = ctx.structOrUnionSpecifier().structDeclarationList().structDeclaration(3).specifierQualifierList().specifierQualifierList().typeSpecifier().getText();
-                    index++;
-                    break;
-
-            }
-
-        }
+        String[] typeAndName = {type,id};
 
         return typeAndName;
     }
@@ -320,50 +331,13 @@ public class C_rules extends CBaseVisitor<String[] >
      */
     @Override public String[] visitTypeSpecifierEnum(CParser.TypeSpecifierEnumContext ctx)
     {
-
         String type = ctx.enumSpecifier().Enum().getText();
         String id = ctx.enumSpecifier().Identifier().getText();
-        String typeAndName[]= {"","","","","","","","","","","",""}  ;
-        typeAndName[0] = type ;
-        typeAndName[1] = id ;
-        int index = 2 ;
-        CParser.EnumeratorListContext x =  ctx.enumSpecifier().enumeratorList();
-        Str_no_of_var[Str_no_of_var_index]  = x.getChildCount() - (x.getChildCount()/2);
-        Str_no_of_var_index++;
-        for ( int i = 0 ; i < (x.getChildCount() - (x.getChildCount()/2)) ; i++)
-        {
-            switch (i) {
-                case 0:
-                    typeAndName[index] = ctx.enumSpecifier().enumeratorList().enumerator(0).enumerationConstant().Identifier().getText();
-                    index++;
-                    break;
-                case 1:
-                    typeAndName[index] = ctx.enumSpecifier().enumeratorList().enumerator(1).enumerationConstant().Identifier().getText();
-                    index++;
-                    break;
-                case 2:
-                    typeAndName[index] = ctx.enumSpecifier().enumeratorList().enumerator(2).enumerationConstant().Identifier().getText();
-                    index++;
-                    break;
-                case 3:
-                    typeAndName[index] = ctx.enumSpecifier().enumeratorList().enumerator(3).enumerationConstant().Identifier().getText();
-                    index++;
-                    break;
-                case 4:
-                    typeAndName[index] = ctx.enumSpecifier().enumeratorList().enumerator(4).enumerationConstant().Identifier().getText();
-                    index++;
-                    break;
-                case 5:
-                    typeAndName[index] = ctx.enumSpecifier().enumeratorList().enumerator(5).enumerationConstant().Identifier().getText();
-                    index++;
-                    break;
 
-
-            }
-        }
-
-        return typeAndName ;
+        String[] typeAndName = {type,id};
+        return typeAndName;
     }
+
     /**
      *  @brief <b>visitGlobalDeclaration</b>
      *  The global decleration get inside
@@ -379,9 +353,6 @@ public class C_rules extends CBaseVisitor<String[] >
         visit(ctx.functionDefinition().declarator().directDeclarator().parameterTypeList().parameterList());
         System.out.println("");
         visit(ctx.functionDefinition().compoundStatement().blockItemList());
-
-
-
 
         String[] s = {ctx.getText()};
         return s;

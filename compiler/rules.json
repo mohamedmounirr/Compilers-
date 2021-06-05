@@ -1,21 +1,24 @@
 {
-  "declare": {
-    "struct": "Std_.+_s",
-    "union": "Std_.+_u",
-    "types": "Std_.+_t",
-    "enum": "Std_.+_e",
-    "api": "Std_.+_api"
+  "local":
+  {
+    "struct": "Lc_.+_s",
+    "union": "Lc_.+_u",
+    "enum": "Lc_.+_e",
+    "other": "Lc_.+"
   },
-  "global":{
+  "global":
+  {
     "struct": "Glb_.+_s",
     "union": "Glb_.+_u",
     "enum": "Glb_.+_e",
     "other": "Glb_.+"
   },
-  "local":{
-    "struct": "Lc_.+_s",
-    "union": "Lc_.+_u",
-    "enum": "Lc_.+_e",
-    "other": "Lc_.+"
+  "declare":
+  {
+    "struct": "Std_.+_s",
+    "union": "Std_.+_u",
+    "types": "Std_.+_t",
+    "enum": "Std_.+_e",
+    "api": "Std_.+_api"
   }
 }
