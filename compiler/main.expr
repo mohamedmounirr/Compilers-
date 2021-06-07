@@ -1,48 +1,41 @@
-
 int Glb_var ;
-struct Glb_str1_s
+struct Std_str1_s
 {
    int   str1_var1  ;
    char  str1_var2  ;
    float str1_var3  ;
 };
-struct Glb_str1_s
+struct Std_str1_s
 {
    int   str2_var1  ;
    char  str2_var2  ;
    float str2_var3  ;
 };
-union Glb_uni1_u
+
+union Std_uni1_u
 {
    int   Union1_var1  ;
    char  Union1_var2  ;
    float Union1_var3  ;
 };
-union Glb_uni1_u
+union Std_uni1_u
 {
    int   Union2_var1  ;
    char  Union2_var2  ;
    float Union2_var3  ;
 };
+struct Std_str1_s  Glb_m_s;
 
 int Std_main_api(int x , int y )
 {
-
-    enum Lc_moh_e
+    int Lc_var  ;
+    enum Std_mo_
     {
        enum2_var1,
        enum2_var2,
        enum2_var3,
     };
 
-
-   struct Glb_str1_s  Std_m_s;
-   int Lc_var  ;
-   union Glb_uni1_u  Std_Uni1_u;
-
-
-
-
-
-
+   struct Std_str1_s  Lc_m_s;
+   union Std_uni1_u  Lc_Uni1_u;
 }

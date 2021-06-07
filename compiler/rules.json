@@ -4,8 +4,8 @@
     "union": "Std_.+_u",
     "types": "Std_.+_t",
     "enum": "Std_.+_e",
-    "api": "Std_.+_api",
-    "other": "Lc_.+"
+    "api": "Std_.+_api"
+
   },
   "global":{
     "struct": "Glb_.+_s",

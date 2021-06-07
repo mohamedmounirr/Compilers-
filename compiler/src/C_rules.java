@@ -24,7 +24,6 @@ public class C_rules extends CBaseVisitor<String[] >
         Filename = m ;
 
     }
-
     /*int [] Str_no_of_var = {0,0,0,0,0,0,0,0};
     int [] Enum_no_of_var = {0,0,0,0,0,0,0,0};
     int Str_no_of_var_index = 0 ;
@@ -42,8 +41,7 @@ public class C_rules extends CBaseVisitor<String[] >
      *  @details
      */
     //externalDdeclaration: declaration
-    @Override
-    public String[] visitGlobalDeclaration(CParser.GlobalDeclarationContext ctx) {
+    @Override public String[] visitGlobalDeclaration(CParser.GlobalDeclarationContext ctx) {
         //System.out.println("Global declaration " + ctx.getText() + " in line: " + ctx.start.getLine());
         CParser.DeclarationSpecifiersContext declarationSpecifiers = ctx.declaration().declarationSpecifiers();
         int numOfdeclarationSpecifiers = declarationSpecifiers.getChildCount();
@@ -53,42 +51,19 @@ public class C_rules extends CBaseVisitor<String[] >
             String type = declarationSpecifiers.declarationSpecifier(0).getText();
             String id = declarationSpecifiers.declarationSpecifier(1).getText();
 
-
-            if(type.length() == 3)
-            {
-                if(type.charAt(0) == 'i' && type.charAt(1) == 'n' && type.charAt(2) == 't' ) {
-                    if ((!id.matches((String) globalObject.get("other")))) {
-                        System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("other"));
-                    }
-                }
-            }
-            if(type.length() == 4)
-            {
-                if(type.charAt(0) == 'c' && type.charAt(1) == 'h' && type.charAt(2) == 'a' && type.charAt(3) == 'r') {
-                    if ((!id.matches((String) globalObject.get("other")))) {
-                        System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("other"));
-                    }
-                }
-            }
-            if(type.length() == 5)
-            {
-                if(type.charAt(0) == 'f' && type.charAt(1) == 'l' && type.charAt(2) == 'o' && type.charAt(3) == 'a' && type.charAt(4) == 't' )
-                {
-                    if ((!id.matches((String) globalObject.get("other")))) {
-                        System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("other"));
-                    }
-                }
-            }
-            else if (type.length() > 4 && type.substring(0, 4).equals("enum") && !id.matches((String) globalObject.get("enum")))
+            if (type.length() > 4 && type.substring(0, 4).equals("enum") && !id.matches((String) globalObject.get("enum")))
             {
                 System.out.println("Line " + ctx.start.getLine() + ": Enum " + type.substring(4) + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("enum"));
-            } else if (type.length() > 5 && type.substring(0, 5).equals("union") && !id.matches((String) globalObject.get("union")))
+            }
+            else if (type.length() > 5 && type.substring(0, 5).equals("union") && !id.matches((String) globalObject.get("union")))
             {
                 System.out.println("Line " + ctx.start.getLine() + ": Union " + type.substring(5) + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("union"));
-            } else if (type.length() > 6 && type.substring(0, 6).equals("struct") && !id.matches((String) globalObject.get("struct")))
+            }
+            else if (type.length() > 6 && type.substring(0, 6).equals("struct") && !id.matches((String) globalObject.get("struct")))
             {
                 System.out.println("Line " + ctx.start.getLine() + ": Struct " + type.substring(6) + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("struct"));
-            } else if (!id.matches((String) globalObject.get("other")))
+            }
+            else if (!id.matches((String) globalObject.get("other")))
             {
                 System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("other"));
             }
@@ -100,14 +75,10 @@ public class C_rules extends CBaseVisitor<String[] >
         {
             String[] typeAndID = visit(declarationSpecifiers.declarationSpecifier(0).typeSpecifier());
             //System.out.println("Data structure, type: " + typeAndID[0] + ", id: " + typeAndID[1]);
-            String type = typeAndID[0];
-            String id = typeAndID[1];
-
-            if (!typeAndID[1].matches((String) globalObject.get(typeAndID[0]))) {
+            if (!typeAndID[1].matches((String) declareObject.get(typeAndID[0])))
+            {
                 System.out.println("Line " + ctx.start.getLine() + ": " + typeAndID[0] + " \"" + typeAndID[1] + "\" should follow the pattern: " + (String) declareObject.get(typeAndID[0]));
             }
-
-
         }
         String[] s = {ctx.getText()};
         return s;
@@ -122,54 +93,43 @@ public class C_rules extends CBaseVisitor<String[] >
      */
     @Override public String[] visitLocalDeclaration(CParser.LocalDeclarationContext ctx)
     {
+        //System.out.println("Local declaration " + ctx.getText() + " in line: " + ctx.start.getLine());
         CParser.DeclarationSpecifiersContext declarationSpecifiers = ctx.declaration().declarationSpecifiers();
-        int numOfBranches = declarationSpecifiers.getChildCount();
-        if(numOfBranches == 2)
-        {
+        int numOfdeclarationSpecifiers = declarationSpecifiers.getChildCount();
+
+
+        if(numOfdeclarationSpecifiers == 2){
             String type = declarationSpecifiers.declarationSpecifier(0).getText();
             String id = declarationSpecifiers.declarationSpecifier(1).getText();
 
-            if(type.length() == 3)
+            if(type.length() > 4 && type.substring(0,4).equals("enum") && !id.matches((String) localObject.get("enum")))
             {
-                if(type.charAt(0) == 'i' && type.charAt(1) == 'n' && type.charAt(2) == 't' ) {
-                    if ((!id.matches((String) declareObject.get("other")))) {
-                        System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) declareObject.get("other"));
-                    }
-                }
+                System.out.println("Line " + ctx.start.getLine() + ": Enum " + type.substring(4) + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("enum"));
             }
-            if(type.length() == 4)
+            else if(type.length() > 5 && type.substring(0,5).equals("union") && !id.matches((String) localObject.get("union")))
             {
-                if(type.charAt(0) == 'c' && type.charAt(1) == 'h' && type.charAt(2) == 'a' && type.charAt(3) == 'r' )
-                {
-                    if ((!id.matches((String) declareObject.get("other")))) {
-                        System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) declareObject.get("other"));
-                    }
-                }
+                System.out.println("Line " + ctx.start.getLine() + ": Union " + type.substring(5) + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("union"));
             }
-            if(type.length() == 5)
+            else if(type.length() > 6 && type.substring(0,6).equals("struct") && !id.matches((String) localObject.get("struct")))
             {
-                if(type.charAt(0) == 'f' && type.charAt(1) == 'l' && type.charAt(2) == 'o' && type.charAt(3) == 'a' && type.charAt(4) == 't' ) {
-                    if ((!id.matches((String) declareObject.get("other")))) {
-                        System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) declareObject.get("other"));
-                    }
-                }
+                System.out.println("Line " + ctx.start.getLine() + ": Struct " + type.substring(6) + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("struct"));
             }
-            else if(type.length() > 4 && type.substring(0,4).equals("enum") && !id.matches((String) declareObject.get("union")))
+            else if(!id.matches((String) localObject.get("other")))
             {
-                System.out.println("Error : Line " + ctx.start.getLine() +" FileName : " + Filename +": Enum " + type.substring(4) + " \"" + id + "\" you have to write it like is " + (String) declareObject.get("enum"));
+                System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("other"));
             }
-            else if(type.length() > 5 && type.substring(0,5).equals("union") && !id.matches((String) declareObject.get("union")))
-            {
-                System.out.println("Error : Line " + ctx.start.getLine() +" FileName : " + Filename +": Union " + type.substring(5) + " \"" + id + "\" you have to write it like is " + (String) declareObject.get("union"));
-            }
-            else if(type.length() > 6 && type.substring(0,6).equals("struct") && !id.matches((String) declareObject.get("struct")))
-            {
-                System.out.println("Error : Line " + ctx.start.getLine() +" FileName : " + Filename +": Struct " + type.substring(6) + " \"" + id + "\" you have to write it like is " + (String) declareObject.get("struct"));
-            }
-
-
+            //System.out.println("local, type: " + type + ", id: " + id);
         }
-        //Struct or union or enum
+        else if (numOfdeclarationSpecifiers == 1)
+        {
+            String[] typeAndID = visit(declarationSpecifiers.declarationSpecifier(0).typeSpecifier());
+            //System.out.println("Data structure, type: " + typeAndID[0] + ", id: " + typeAndID[1]);
+            if (!typeAndID[1].matches((String) declareObject.get(typeAndID[0])))
+            {
+                System.out.println("Line " + ctx.start.getLine() + ": " + typeAndID[0] + " \"" + typeAndID[1] + "\" should follow the pattern: " + (String) declareObject.get(typeAndID[0]));
+            }
+        }
+
         /*else if(numOfBranches == 1)
         {
             String[] typeAndID = visit(declarationSpecifiers.declarationSpecifier(0).typeSpecifier());
