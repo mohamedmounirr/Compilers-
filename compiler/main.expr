@@ -27,7 +27,7 @@ union Glb_uni1_u
 
 int Std_main_api(int x , int y )
 {
-int L_var  ;
+
     enum Lc_moh_e
     {
        enum2_var1,
@@ -37,7 +37,7 @@ int L_var  ;
 
 
    struct Glb_str1_s  Std_m_s;
-
+   int Lc_var  ;
    union Glb_uni1_u  Std_Uni1_u;
 
 
