@@ -15,8 +15,8 @@ public class C_rules extends CBaseVisitor<String[] >
     JSONObject declareObject = new JSONObject();
     JSONObject globalObject = new JSONObject();
     JSONObject localObject = new JSONObject();
-    FileReader Filename ;
-    public C_rules(JSONObject declareObject, JSONObject globalObject, JSONObject localObject , FileReader m )
+    String Filename ;
+    public C_rules(JSONObject declareObject, JSONObject globalObject, JSONObject localObject , String m )
     {
         this.declareObject = declareObject;
         this.globalObject = globalObject;
@@ -53,19 +53,19 @@ public class C_rules extends CBaseVisitor<String[] >
 
             if (type.length() > 4 && type.substring(0, 4).equals("enum") && !id.matches((String) globalObject.get("enum")))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": Enum " + type.substring(4) + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("enum"));
+                System.out.println("Error in File :"+ Filename + " Line " + ctx.start.getLine() + ": Enum " + type.substring(4) + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("enum"));
             }
             else if (type.length() > 5 && type.substring(0, 5).equals("union") && !id.matches((String) globalObject.get("union")))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": Union " + type.substring(5) + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("union"));
+                System.out.println("Error in File :"+ Filename + " Line "+  ctx.start.getLine() + ": Union " + type.substring(5) + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("union"));
             }
             else if (type.length() > 6 && type.substring(0, 6).equals("struct") && !id.matches((String) globalObject.get("struct")))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": Struct " + type.substring(6) + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("struct"));
+                System.out.println("Error in File :"+ Filename + " Line "+ ctx.start.getLine() + ": Struct " + type.substring(6) + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("struct"));
             }
             else if (!id.matches((String) globalObject.get("other")))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("other"));
+                System.out.println("Error in File :"+ Filename + " Line "+ ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) globalObject.get("other"));
             }
             //System.out.println("Global, type: " + type + ", id: " + id);
 
@@ -77,7 +77,7 @@ public class C_rules extends CBaseVisitor<String[] >
             //System.out.println("Data structure, type: " + typeAndID[0] + ", id: " + typeAndID[1]);
             if (!typeAndID[1].matches((String) declareObject.get(typeAndID[0])))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": " + typeAndID[0] + " \"" + typeAndID[1] + "\" should follow the pattern: " + (String) declareObject.get(typeAndID[0]));
+                System.out.println("Error in File :"+ Filename + " Line "+ ctx.start.getLine() + ": " + typeAndID[0] + " \"" + typeAndID[1] + "\" should follow the pattern: " + (String) declareObject.get(typeAndID[0]));
             }
         }
         String[] s = {ctx.getText()};
@@ -104,19 +104,19 @@ public class C_rules extends CBaseVisitor<String[] >
 
             if(type.length() > 4 && type.substring(0,4).equals("enum") && !id.matches((String) localObject.get("enum")))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": Enum " + type.substring(4) + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("enum"));
+                System.out.println("Error in File :"+ Filename + " Line "+ ctx.start.getLine() + ": Enum " + type.substring(4) + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("enum"));
             }
             else if(type.length() > 5 && type.substring(0,5).equals("union") && !id.matches((String) localObject.get("union")))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": Union " + type.substring(5) + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("union"));
+                System.out.println("Error in File :"+ Filename + " Line "+ ctx.start.getLine() + ": Union " + type.substring(5) + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("union"));
             }
             else if(type.length() > 6 && type.substring(0,6).equals("struct") && !id.matches((String) localObject.get("struct")))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": Struct " + type.substring(6) + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("struct"));
+                System.out.println("Error in File :"+ Filename + " Line "+ ctx.start.getLine() + ": Struct " + type.substring(6) + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("struct"));
             }
             else if(!id.matches((String) localObject.get("other")))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("other"));
+                System.out.println("Error in File :"+ Filename + " Line "+ ctx.start.getLine() + ": " + type + " \"" + id + "\" should follow the pattern: " + (String) localObject.get("other"));
             }
             //System.out.println("local, type: " + type + ", id: " + id);
         }
@@ -126,7 +126,7 @@ public class C_rules extends CBaseVisitor<String[] >
             //System.out.println("Data structure, type: " + typeAndID[0] + ", id: " + typeAndID[1]);
             if (!typeAndID[1].matches((String) declareObject.get(typeAndID[0])))
             {
-                System.out.println("Line " + ctx.start.getLine() + ": " + typeAndID[0] + " \"" + typeAndID[1] + "\" should follow the pattern: " + (String) declareObject.get(typeAndID[0]));
+                System.out.println("Error in File :"+ Filename + " Line "+ ctx.start.getLine() + ": " + typeAndID[0] + " \"" + typeAndID[1] + "\" should follow the pattern: " + (String) declareObject.get(typeAndID[0]));
             }
         }
 

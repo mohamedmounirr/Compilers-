@@ -24,18 +24,17 @@ union Std_uni1_u
    char  Union2_var2  ;
    float Union2_var3  ;
 };
-struct Std_str1_s  Glb_m_s;
+struct Std_str1_s  Gl_m_s;
 
 int Std_main_api(int x , int y )
 {
     int Lc_var  ;
-    enum Std_mo_
+    enum Std_mo_e
     {
        enum2_var1,
        enum2_var2,
        enum2_var3,
     };
-
    struct Std_str1_s  Lc_m_s;
    union Std_uni1_u  Lc_Uni1_u;
 }

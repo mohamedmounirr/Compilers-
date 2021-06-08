@@ -40,14 +40,14 @@ public class test {
             e.printStackTrace();
         }
 
-        String inputFile = "main.expr";
+        String inputFile = "main.c";
         FileInputStream is = new FileInputStream(inputFile) ;
         ANTLRInputStream input = new ANTLRInputStream(is);
         CLexer lexer = new CLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CParser parser = new CParser(tokens);
         ParseTree tree1 = parser.compilationUnit();
-        C_rules cv = new C_rules(declareObject,globalObject,localObject,reader);
+        C_rules cv = new C_rules(declareObject,globalObject,localObject,inputFile);
         cv.visit(tree1);
         //ParseTreeWalker parseTreeWalker = new ParseTreeWalker();
         //parseTreeWalker.walk(new C_rules() , tree);
